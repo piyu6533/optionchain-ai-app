@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NSE Options Terminal</title>
+<style>
+body{background:#0e1117;color:white;font-family:Arial;text-align:center}
+.panel{border:1px solid #333;padding:20px;margin:20px;border-radius:10px}
+</style>
+</head>
+
+<body>
+
+<h1>NSE Live Options Dashboard</h1>
+
+<div class="panel">
+<h2 id="spot">Spot: --</h2>
+<h2 id="pcr">PCR: --</h2>
+<h2 id="signal">Signal: --</h2>
+</div>
+
+<script>
+
+let ws = new WebSocket("ws://localhost:8000/ws")
+
+ws.onmessage = function(event){
+
+let data = JSON.parse(event.data)
+
+document.getElementById("spot").innerText="Spot: "+data.spot
+document.getElementById("pcr").innerText="PCR: "+data.pcr
+document.getElementById("signal").innerText="Signal: "+data.signal
+
+}
+
+</script>
+
+</body>
+</html>
